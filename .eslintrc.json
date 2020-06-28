@@ -4,7 +4,7 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "rules": {
-    "comma-dangle": "off",
+    "comma-dangle": ["warn", "never"],
     "space-before-blocks": "warn",
     "eol-last": "off",
     "prettier/prettier": 0,
