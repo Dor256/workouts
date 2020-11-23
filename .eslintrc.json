@@ -3,9 +3,12 @@
   "extends": "@react-native-community",
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
+  "env": {
+    "jest/globals": true
+  },
   "rules": {
     "comma-dangle": ["warn", "never"],
-    "space-before-blocks": "warn",
+    "space-before-blocks": "warn", 
     "eol-last": "off",
     "prettier/prettier": 0,
     "no-mixed-spaces-and-tabs": "off",
