@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, ImageSourcePropType } from 'react-native';
-import { styles } from '../styles';
+import { styles } from '../../styles';
 
 export type TabImageProps = {
   source: ImageSourcePropType;

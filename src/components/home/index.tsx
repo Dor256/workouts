@@ -1,34 +1,25 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { Text, View, FlatList } from 'react-native';
-import { styles } from './styles';
-import { WorkoutItem } from './components/workout-item';
+import { createStackNavigator, StackNavigationOptions } from '@react-navigation/stack';
 import { IWorkout, WorkoutAPI } from '../../core/api';
-import { FloatingActionButton } from './components/fab';
-import { createStackNavigator } from '@react-navigation/stack';
-import { Route, useRoute } from '@react-navigation/native';
+import { WorkoutList } from './components/workout-list';
+import { Route } from '@react-navigation/native';
+import { AddWorkout } from '../add-workout';
 
-export type StackRoutes = {
+export type ModalParams = {
+  AddWorkout: {};
   List: {};
-  Workout: { name: string };
-}
-
-const { Navigator, Screen } = createStackNavigator<StackRoutes>();
-
-function Stam() {
-  const route = useRoute<Route<string, {name: string}>>();
-  return <Text>{route.params.name}</Text>;
 }
 
 export type HomeProps = {
   api: WorkoutAPI;
-};
-
-function renderItem({ item }: { item: IWorkout }) {
-  return <WorkoutItem name={item.name} />;
 }
 
-function keyExtractor(_: IWorkout, index: number) {
-  return `${index}`;
+const { Navigator, Screen } = createStackNavigator<ModalParams>();
+
+function screenOptions({ route }: { route: Route<keyof ModalParams, {}> }): StackNavigationOptions {
+  return {
+    headerShown: route.name === 'AddWorkout'
+  };
 }
 
 export const Home: FunctionComponent<HomeProps> = (props) => {
@@ -39,30 +30,19 @@ export const Home: FunctionComponent<HomeProps> = (props) => {
     setWorkouts(dummyWorkouts);
   }, [props.api]);
 
-  function onFABPress() {
-    props.api.addWorkout({ name: 'DumDum' });
+  const addWorkout = (workout: IWorkout) => {
+    props.api.addWorkout(workout);
     setWorkouts([...props.api.getWorkouts()]);
-  }
+  };
 
   return (
-    <Navigator>
-      <Screen name="List" options={{ headerShown: false }}>
-        {() => {
-          return (
-            <View style={styles.container}>
-              <Text style={styles.heading}>Workouts</Text>
-              <FlatList
-                extraData={workouts}
-                data={workouts}
-                renderItem={renderItem}
-                keyExtractor={keyExtractor}
-              />
-              <FloatingActionButton onPress={onFABPress} />
-            </View>
-          );
-        }}
+    <Navigator mode="modal" screenOptions={screenOptions} initialRouteName="List">
+      <Screen name="List">
+        {() => <WorkoutList workouts={workouts} />}
       </Screen>
-      <Screen name="Workout" component={Stam} />
+      <Screen name="AddWorkout">
+        {() => <AddWorkout addWorkout={addWorkout} />}
+      </Screen>
     </Navigator>
   );
 };

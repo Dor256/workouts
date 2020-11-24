@@ -49,6 +49,9 @@
       "json",
       "node"
     ],
+    "transformIgnorePatterns": [ 
+      "node_modules/(?!((jest-)?react-native|react-navigation|@react-navigation/.*))" 
+    ],
     "setupFiles": [
       "<rootDir>/jest-setup.js"
     ]

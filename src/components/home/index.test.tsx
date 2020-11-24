@@ -16,10 +16,13 @@ describe('Home Screen', () => {
   });
 
   it('Adds a workout', async () => {
+    const mockWorkout = 'mock';
     const driver = renderComponentAndCreateDriver(<Home api={mockApi} />);
 
     await driver.tapFab();
+    await driver.typeWorkoutInput(mockWorkout);
+    await driver.tapAddWorkout();
 
-    expect(mockApi.addWorkout).toHaveBeenCalled();
+    expect(mockApi.addWorkout).toHaveBeenCalledWith({ name: mockWorkout });
   });
 });

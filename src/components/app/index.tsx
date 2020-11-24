@@ -2,10 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { NavigationContainer, Route } from '@react-navigation/native';
 import { createBottomTabNavigator, BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 import { Home } from '../home';
-import { ColoredStatusBar } from '../colored-status-bar';
-import { Colors } from '../../core/constants';
 import { WorkoutAPI } from '../../core/api';
-import { TabImage } from './components/TabImage';
+import { TabImage } from './components/tab-image';
 import { Account } from '../account';
 
 type RouteParams = {
@@ -39,12 +37,15 @@ function screenOptions({ route }: { route: Route<keyof RouteParams, {}> }): Bott
 export const App: FunctionComponent<AppProps> = (props) => {
   return (
     <NavigationContainer>
-      <ColoredStatusBar backgroundColor={Colors.BLUE} />
-      <Navigator screenOptions={screenOptions} tabBarOptions={{ showLabel: false }}>
+      <Navigator
+        backBehavior="none"
+        screenOptions={screenOptions}
+        tabBarOptions={{ showLabel: false }}
+      >
         <Screen name="Home">
           {() => <Home api={props.api} />}
         </Screen>
-        <Screen name="Account" component={Account}/>
+        <Screen name="Account" component={Account} />
       </Navigator>
     </NavigationContainer>
   );
