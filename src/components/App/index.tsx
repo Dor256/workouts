@@ -1,11 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, Route } from '@react-navigation/native';
 import { createBottomTabNavigator, BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 import { Home } from '../home';
 import { ColoredStatusBar } from '../colored-status-bar';
 import { Colors } from '../../core/constants';
 import { WorkoutAPI } from '../../core/api';
-import { BottomTabNavigationProps } from '../../core/typings';
 import { TabImage } from './components/TabImage';
 import { Account } from '../account';
 
@@ -20,7 +19,7 @@ export type AppProps = {
   api: WorkoutAPI;
 };
 
-function screenOptions({ route }: BottomTabNavigationProps): BottomTabNavigationOptions {
+function screenOptions({ route }: { route: Route<keyof RouteParams, {}> }): BottomTabNavigationOptions {
   return {
     tabBarIcon: (props) => {
       switch (route.name) {
