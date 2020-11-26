@@ -8,7 +8,14 @@ export function renderComponentAndCreateDriver(Component: React.ReactElement<Hom
 
   return {
     async workout(workout: string) {
-      return await component.findByText(workout);
+      return await component.findByTestId(`workout-${workout}`);
+    },
+
+    async tapWorkout(workout: string) {
+      const workoutItem = await component.findByTestId(`workout-${workout}`);
+      act(() => {
+        fireEvent.press(workoutItem);
+      });
     },
 
     async fab() {
@@ -34,6 +41,10 @@ export function renderComponentAndCreateDriver(Component: React.ReactElement<Hom
       act(() => {
         fireEvent.press(addWorkout);
       });
+    },
+
+    async workoutPage() {
+      return await component.findByTestId('workout-page');
     }
   };
 }

@@ -5,7 +5,8 @@ import { WorkoutItem } from '../../components/workout-item';
 import { IWorkout } from '../../../../core/api';
 import { FloatingActionButton } from '../../components/fab';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
-import { Route, useNavigation, useRoute } from '@react-navigation/native';
+import { Route, useNavigation } from '@react-navigation/native';
+import { Workout } from '../../../workout';
 
 export type StackParams = {
   List: {};
@@ -16,11 +17,6 @@ export type StackParams = {
 export type StackRoutes<T extends keyof StackParams> = Route<T, StackParams[T]>
 
 const { Navigator, Screen } = createStackNavigator<StackParams>();
-
-function Stam() {
-  const route = useRoute<StackRoutes<'Workout'>>();
-  return <Text>{route.params.name}</Text>;
-}
 
 export type WorkoutListProps = {
   workouts: IWorkout[];
@@ -59,7 +55,7 @@ export const WorkoutList: FunctionComponent<WorkoutListProps> = (props) => {
           );
         }}
       </Screen>
-      <Screen name="Workout" component={Stam} />
+      <Screen name="Workout" component={Workout} />
     </Navigator>
   );
 };

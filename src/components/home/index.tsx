@@ -4,6 +4,7 @@ import { IWorkout, WorkoutAPI } from '../../core/api';
 import { WorkoutList } from './components/workout-list';
 import { Route } from '@react-navigation/native';
 import { AddWorkout } from '../add-workout';
+import { ModalBackButton } from '../../core/components/modal-back-button';
 
 export type ModalParams = {
   AddWorkout: {};
@@ -17,9 +18,17 @@ export type HomeProps = {
 const { Navigator, Screen } = createStackNavigator<ModalParams>();
 
 function screenOptions({ route }: { route: Route<keyof ModalParams, {}> }): StackNavigationOptions {
-  return {
-    headerShown: route.name === 'AddWorkout'
-  };
+  switch (route.name) {
+    case 'AddWorkout':
+      return {
+        headerShown: true,
+        headerLeft: ({ onPress }) => <ModalBackButton onPress={onPress} />
+      };
+    default:
+      return {
+        headerShown: false
+      };
+  }
 }
 
 export const Home: FunctionComponent<HomeProps> = (props) => {

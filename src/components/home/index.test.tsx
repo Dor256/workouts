@@ -25,4 +25,12 @@ describe('Home Screen', () => {
 
     expect(mockApi.addWorkout).toHaveBeenCalledWith({ name: mockWorkout });
   });
+
+  it('Displays chosen workout plan', async () => {
+    const driver = renderComponentAndCreateDriver(<Home api={mockApi} />);
+
+    await driver.tapWorkout('MadCow');
+
+    expect(await driver.workoutPage()).toBeDefined();
+  });
 });
