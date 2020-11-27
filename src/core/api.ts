@@ -35,10 +35,10 @@ const http: Http = {
 
 export const api: WorkoutAPI = {
   async getWorkouts(): Promise<IWorkout[]> {
-    return await http.get(`${baseURL}/`);
+    return await http.get(`${baseURL}/workout`);
   },
 
   async addWorkout(workout: IWorkout) {
-    await http.post(`${baseURL}/`, workout);
+    await http.post(`${baseURL}/workout`, workout);
   }
 };
