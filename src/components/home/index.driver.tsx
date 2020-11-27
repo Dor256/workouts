@@ -38,8 +38,8 @@ export function renderComponentAndCreateDriver(Component: React.ReactElement<Hom
 
     async tapAddWorkout() {
       const addWorkout = await component.findByTestId('add-workout');
-      act(() => {
-        fireEvent.press(addWorkout);
+      await act(async () => {
+        await fireEvent.press(addWorkout);
       });
     },
 

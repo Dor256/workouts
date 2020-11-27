@@ -8,7 +8,7 @@ import { ModalParams } from '../home';
 import { styles } from './styles';
 
 export type AddWorkoutProps = {
-  addWorkout(workout: IWorkout): void;
+  addWorkout(workout: IWorkout): Promise<void>;
 }
 
 export const AddWorkout: FunctionComponent<AddWorkoutProps> = (props) => {
@@ -19,8 +19,8 @@ export const AddWorkout: FunctionComponent<AddWorkoutProps> = (props) => {
     setText(changedText);
   }
 
-  function onAddPress() {
-    props.addWorkout({ name: text });
+  async function onAddPress() {
+    await props.addWorkout({ name: text });
     navigation.goBack();
   }
 

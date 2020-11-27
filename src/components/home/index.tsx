@@ -35,13 +35,14 @@ export const Home: FunctionComponent<HomeProps> = (props) => {
   const [workouts, setWorkouts] = useState<IWorkout[]>([]);
 
   useEffect(() => {
-    const dummyWorkouts = props.api.getWorkouts();
-    setWorkouts(dummyWorkouts);
+    props.api.getWorkouts().then((newWorkouts) => {
+      setWorkouts(newWorkouts);
+    });
   }, [props.api]);
 
-  const addWorkout = (workout: IWorkout) => {
-    props.api.addWorkout(workout);
-    setWorkouts([...props.api.getWorkouts()]);
+  const addWorkout = async (workout: IWorkout) => {
+    await props.api.addWorkout(workout);
+    setWorkouts([...await props.api.getWorkouts()]);
   };
 
   return (

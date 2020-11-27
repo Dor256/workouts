@@ -10,5 +10,7 @@ import 'react-native-gesture-handler/jestSetup';
 //   return Reanimated;
 // });
 
+global.fetch = jest.fn();
+
 // Silence the warning: Animated: `useNativeDriver` is not supported because the native animated module is missing
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
