@@ -37,5 +37,8 @@ export const styles = StyleSheet.create({
     color: 'white',
     fontWeight: '700',
     fontSize: 23
+  },
+  loader: {
+    marginTop: '70%'
   }
 });
