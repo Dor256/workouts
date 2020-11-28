@@ -42,7 +42,7 @@ export const WorkoutList: FunctionComponent<WorkoutListProps> = (props) => {
       <Screen name="List">
         {() => {
           return (
-            <View style={styles.container}>
+            <View testID="workout-list" style={styles.container}>
               <Text style={styles.heading}>Workouts</Text>
               <FlatList
                 extraData={props.workouts}

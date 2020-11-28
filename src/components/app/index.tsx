@@ -2,9 +2,11 @@ import React, { FunctionComponent } from 'react';
 import { NavigationContainer, Route } from '@react-navigation/native';
 import { createBottomTabNavigator, BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 import { Home } from '../home';
-import { WorkoutAPI } from '../../core/api';
+import type { API } from '../../core/api';
 import { TabImage } from './components/tab-image';
 import { Account } from '../account';
+import { Auth } from '../auth';
+import { useAuth } from '../../core/hooks/useAuth';
 
 type RouteParams = {
   Home: {},
@@ -13,8 +15,13 @@ type RouteParams = {
 
 const { Navigator, Screen } = createBottomTabNavigator<RouteParams>();
 
+export type User = {
+  name: string;
+  email: string;
+}
+
 export type AppProps = {
-  api: WorkoutAPI;
+  api: API;
 };
 
 function screenOptions({ route }: { route: Route<keyof RouteParams, {}> }): BottomTabNavigationOptions {
@@ -35,6 +42,12 @@ function screenOptions({ route }: { route: Route<keyof RouteParams, {}> }): Bott
 }
 
 export const App: FunctionComponent<AppProps> = (props) => {
+  const auth = useAuth();
+
+  if (!auth.user) {
+    return <Auth />;
+  }
+
   return (
     <NavigationContainer>
       <Navigator

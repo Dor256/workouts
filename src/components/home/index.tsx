@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { createStackNavigator, StackNavigationOptions } from '@react-navigation/stack';
-import { IWorkout, WorkoutAPI } from '../../core/api';
+import type { IWorkout, API } from '../../core/api';
 import { WorkoutList } from './components/workout-list';
 import { Route } from '@react-navigation/native';
 import { AddWorkout } from '../add-workout';
@@ -12,7 +12,7 @@ export type ModalParams = {
 }
 
 export type HomeProps = {
-  api: WorkoutAPI;
+  api: API;
 }
 
 const { Navigator, Screen } = createStackNavigator<ModalParams>();

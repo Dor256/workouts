@@ -3,6 +3,7 @@ import { renderComponentAndCreateDriver } from './index.driver';
 import { Home } from '.';
 
 const mockApi = {
+  login: jest.fn(),
   getWorkouts: jest.fn().mockResolvedValue([{ name: 'MadCow' }]),
   addWorkout: jest.fn()
 };

@@ -1,12 +1,3 @@
-export type IWorkout = {
-  name: string;
-};
-
-export interface WorkoutAPI {
-  getWorkouts(): Promise<IWorkout[]>;
-  addWorkout(workout: IWorkout): Promise<void>;
-}
-
 type RequestBody = {[key: string]: string | number | boolean | RequestBody | string[] | number[] | boolean[] | RequestBody[]};
 
 type Http = {
@@ -33,7 +24,26 @@ const http: Http = {
   }
 };
 
-export const api: WorkoutAPI = {
+export type Credentials = {
+  email: string;
+  password: string;
+}
+
+export type IWorkout = {
+  name: string;
+};
+
+export interface API {
+  login(user: Credentials): Promise<void>;
+  getWorkouts(): Promise<IWorkout[]>;
+  addWorkout(workout: IWorkout): Promise<void>;
+}
+
+export const api: API = {
+  async login(user: Credentials) {
+    await http.post(`${baseURL}/login`, user);
+  },
+
   async getWorkouts(): Promise<IWorkout[]> {
     return await http.get(`${baseURL}/workout`);
   },

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { WorkoutAPI } from '../../core/api';
+import type { API } from '../../core/api';
 import { Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -10,10 +10,10 @@ export type AccountStackParams = {
 const { Navigator, Screen } = createStackNavigator<AccountStackParams>();
 
 export type AccountProps = {
-  api: WorkoutAPI
+  api: API
 }
 
-export const Account: FunctionComponent<WorkoutAPI> = () => {
+export const Account: FunctionComponent<API> = () => {
   return (
     <Navigator>
       <Screen name="Account">

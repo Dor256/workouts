@@ -1,9 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { FunctionComponent, useState } from 'react';
-import { Pressable, Text } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+import { Text } from 'react-native';
 import { IWorkout } from '../../core/api';
+import { Button } from '../../core/components/button';
+import { Input } from '../../core/components/input';
 import { ModalParams } from '../home';
 import { styles } from './styles';
 
@@ -26,16 +27,15 @@ export const AddWorkout: FunctionComponent<AddWorkoutProps> = (props) => {
 
   return (
     <>
-      <TextInput
-        style={styles.input}
+      <Input
         testID="workout-input"
         value={text}
         onChangeText={onChangeText}
         placeholder="Enter workout..."
       />
-      <Pressable style={styles.button} testID="add-workout" onPress={onAddPress}>
+      <Button testID="add-workout" onPress={onAddPress}>
         <Text style={styles.buttonText}>Add</Text>
-      </Pressable>
+      </Button>
     </>
   );
 };

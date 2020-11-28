@@ -1,5 +1,5 @@
-import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import { fireEvent, render, act } from 'react-native-testing-library';
 import { HomeProps } from '.';
 
