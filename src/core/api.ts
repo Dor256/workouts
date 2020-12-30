@@ -45,10 +45,10 @@ export const api: API = {
   },
 
   async getWorkouts(): Promise<IWorkout[]> {
-    return await http.get(`${baseURL}/workout`);
+    return await http.get(`${baseURL}/workouts`);
   },
 
   async addWorkout(workout: IWorkout) {
-    await http.post(`${baseURL}/workout`, workout);
+    await http.post(`${baseURL}/workouts`, workout);
   }
 };
